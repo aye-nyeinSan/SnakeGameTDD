@@ -18,7 +18,7 @@ public class SnakeTest {
     private Snake snake;
     @Before
     public void setup(){
-        snake = new Snake(new Point2D(0,0),0);
+        snake = new Snake(new Point2D(0,0));
     }
     @Test
     public void snakeShouldBeSpawnAtTheCoordinateItWasCreated(){
@@ -51,14 +51,14 @@ public class SnakeTest {
     }
     @Test
     public void snakeWillDieIfItGoesBeyondTheGameBorder(){
-        snake = new Snake(new Point2D(30,30),0);
+        snake = new Snake(new Point2D(30,30));
         snake.setCurrentDirection(Direction.RIGHT);
         snake.update();
         assertTrue(snake.isDead());
     }
     @Test
     public void snakeWillDieIfItHitsBody(){
-        snake = new Snake(new Point2D(0,0),0);
+        snake = new Snake(new Point2D(0,0));
         snake.setCurrentDirection(Direction.DOWN);
         snake.update();
         snake.grow();

@@ -6,6 +6,7 @@ import com.chapter5.snakegametdd.model.Snake;
 import com.chapter5.snakegametdd.view.Platform;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class GameLoopTest {
     private Method redraw;
     @Before
     public void init() throws NoSuchMethodException{
-        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food(new Point2D(0, 0)),new Food(new Point2D(0, 0)));
+        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food(new Point2D(0, 0)),new Food(new Point2D(1, 1)));
         update = GameLoop.class.getDeclaredMethod("update");
         update.setAccessible(true);
         collision = GameLoop.class.getDeclaredMethod("checkCollision");
@@ -38,13 +39,13 @@ public class GameLoopTest {
     }
     @Test
     public void testClockTick() throws InvocationTargetException,IllegalAccessException{
-        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food(new Point2D(0, 0)));
+        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food(new Point2D(0, 0)),new Food(new Point2D(1, 1)));
         clockTickHelper();
         assertEquals(gameLoopUnderTest.getSnake().getHead(),new Point2D(0,1));
     }
     @Test
     public void testNoBack() throws InvocationTargetException,IllegalAccessException{
-        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food());
+        gameLoopUnderTest = new GameLoop(new Platform(),new Snake(new Point2D(0,0)),new Food(new Point2D(0, 0)),new Food(new Point2D(1, 1)));
         gameLoopUnderTest.getPlatform().setKey(KeyCode.DOWN);
         clockTickHelper();
         assertEquals(gameLoopUnderTest.getSnake().getHead(),new Point2D(0,1));
