@@ -11,9 +11,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 
 public class GameLoop  implements Runnable{
     private Platform platform;
@@ -91,18 +93,21 @@ public class GameLoop  implements Runnable{
                     AnchorPane pane = new AnchorPane();
                     VBox vbox = new VBox();
 
-                    Text text = new Text("Game Over!!");
+                    Text text = new Text("Game Over!!\n You are Dead!");
                     text.setTextAlignment(TextAlignment.CENTER);
-                    text.setLineSpacing(25);
+                    text.setLineSpacing(10);
                     text.setFont(Font.font("Arial"));
 
                     Text scoreText = new Text(String.valueOf(score));
                     scoreText.setTextAlignment(TextAlignment.CENTER);
-                    scoreText.setLineSpacing(25);
+                    scoreText.setLineSpacing(35);
+                    scoreText.setFont(Font.font("Arial",FontWeight.BOLD, 50));
+
 
                     vbox.getChildren().addAll(text, scoreText);
                     vbox.setAlignment(Pos.CENTER);
-                    vbox.setSpacing(60);// Center-align the VBox content
+
+                    vbox.setSpacing(10);// Center-align the VBox content
 
                     BorderStroke dashedBorderStroke = new BorderStroke(
                             Color.BLACK,                       // Border color
@@ -114,10 +119,13 @@ public class GameLoop  implements Runnable{
 
                     Border dashedBorder = new Border(dashedBorderStroke);
                     pane.setBorder(dashedBorder);
-                    pane.setPadding(new Insets(25));
+                    pane.setPadding(new Insets(20));
                     pane.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, null, null)));
                     pane.setCenterShape(true);
                     pane.getChildren().addAll(vbox);
+                    vbox.setLayoutX(40);
+                    vbox.setLayoutY(20);
+
 
 
                     Popup popup = new Popup();
@@ -125,6 +133,7 @@ public class GameLoop  implements Runnable{
                     popup.setHeight(500);
                     popup.setWidth(500);
                     popup.sizeToScene();
+
 
                     popup.show(Launcher.stage);
                     pane.setOnKeyPressed((e -> {
